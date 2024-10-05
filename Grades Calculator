@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class StudentGradesManager {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Double> grades = new ArrayList<>();
+        String continueInput;
+
+        // Input grades for different subjects
+        do {
+            System.out.print("Enter the grade for a subject: ");
+            double grade = scanner.nextDouble();
+            grades.add(grade);
+
+            System.out.print("Do you want to enter another grade? (yes/no): ");
+            continueInput = scanner.next();
+        } while (continueInput.equalsIgnoreCase("yes"));
+
+        // Calculate average grade
+        double averageGrade = calculateAverage(grades);
+        String letterGrade = getLetterGrade(averageGrade);
+
+        // Display results
+        System.out.printf("Average Grade: %.2f\n", averageGrade);
+        System.out.println("Letter Grade: " + letterGrade);
+
+        // Close the scanner
+        scanner.close();
+    }
+
+    // Method to calculate average grade
+    public static double calculateAverage(List<Double> grades) {
+        double sum = 0.0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        return grades.size() > 0 ? sum / grades.size() : 0.0;
+    }
+
+    // Method to determine letter grade based on average
+    public static String getLetterGrade(double average) {
+        if (average >= 90) {
+            return "A";
+        } else if (average >= 8) {
+            return "B";
+        } else if (average >= 7) {
+            return "C";
+        } else if (average >= 6) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+}
